@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Start - Noleggio Operativo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-bg {
+            background-image: radial-gradient(circle at top right, rgba(61, 191, 168, 0.1) 0%, transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(61, 191, 168, 0.05) 0%, transparent 40%);
+        }
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+        .chart-bar { transform-origin: bottom; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#bcc4f1",
+                        "tertiary-container": "#09143a",
+                        "surface-container-high": "#222b32",
+                        "secondary-fixed": "#00ffcc",
+                        "outline": "#909099",
+                        "surface": "#0d1127",
+                        "tertiary-fixed": "#dde1ff",
+                        "secondary-container": "#009688",
+                        "on-surface-variant": "#c6c5cf",
+                        "on-tertiary-container": "#757faa",
+                        "on-secondary": "#00382f",
+                        "background": "#0d1127",
+                        "on-primary-fixed": "#10193c",
+                        "surface-dim": "#0d1127",
+                        "tertiary": "#bbc4f4",
+                        "primary-fixed": "#dde1ff",
+                        "on-surface": "#dbe3ed",
+                        "surface-bright": "#313a42",
+                        "on-secondary-fixed": "#00201b",
+                        "surface-container-lowest": "#060a1a",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#bcc4f1",
+                        "on-tertiary-fixed": "#0e193e",
+                        "on-secondary-container": "#003028",
+                        "on-primary-container": "#767ea7",
+                        "secondary-fixed-dim": "#00e6b8",
+                        "primary": "#bcc4f1",
+                        "primary-container": "#151b3d",
+                        "inverse-surface": "#dbe3ed",
+                        "on-background": "#dbe3ed",
+                        "inverse-primary": "#545c83",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#2d363d",
+                        "secondary": "#00e6b8",
+                        "surface-container": "#1b213b",
+                        "surface-container-low": "#141933",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#3d456a",
+                        "on-secondary-fixed-variant": "#005045",
+                        "on-tertiary-fixed-variant": "#3b456c",
+                        "surface-variant": "#2d363d",
+                        "outline-variant": "#46464e",
+                        "inverse-on-surface": "#293139",
+                        "on-primary": "#262e52",
+                        "tertiary-fixed-dim": "#bbc4f4",
+                        "on-tertiary": "#242e55",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "16px",
+                        "stack-md": "32px",
+                        "margin": "40px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "stack-lg": "64px"
+            },
+                    "fontFamily": {
+                        "display-xl": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "title-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "label-bold": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-bold": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased selection:bg-secondary selection:text-on-secondary">
+<!-- Shared Component: TopNavBar -->
+<nav class="bg-background/80 backdrop-blur-lg fixed top-0 w-full z-50 border-b border-white/10 flat no shadows">
+<div class="max-w-container-max mx-auto px-margin h-20 flex items-center justify-between">
+<!-- Brand -->
+<a class="flex items-center gap-2" href="#">
+<img alt="Start Logo" class="h-8 w-auto object-contain" data-alt="A highly detailed corporate logo for a modern financial firm named 'Start'. The logo features sharp, precise geometric shapes, prominently including a stylized 'play' triangle motif. The aesthetic is extremely professional, using a sophisticated color palette of night blue and teal. The lighting emphasizes the crisp vector edges, conveying a sense of institutional stability mixed with dynamic forward motion." src="logo.png"/>
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface hidden md:block"><br/></span>
+</a>
+<!-- Navigation Links (Hidden on Mobile) -->
+<div class="hidden md:flex items-center gap-gutter">
+<a class="text-on-surface-variant font-medium hover:text-secondary transition-colors hover:bg-white/5 px-3 py-2 rounded-md" href="#chi-siamo">Chi Siamo</a>
+<a class="text-on-surface-variant font-medium hover:text-secondary transition-colors hover:bg-white/5 px-3 py-2 rounded-md" href="#servizi">Servizi</a>
+<a class="text-on-surface-variant font-medium hover:text-secondary transition-colors hover:bg-white/5 px-3 py-2 rounded-md" href="#perche-noleggio">Perché il Noleggio</a><a class="text-on-surface-variant font-medium hover:text-secondary transition-colors hover:bg-white/5 px-3 py-2 rounded-md" href="#team">Il Team</a>
+<a class="text-on-surface-variant font-medium hover:text-secondary transition-colors hover:bg-white/5 px-3 py-2 rounded-md" href="#contatti">Contatti</a>
+</div>
+<!-- Trailing Action -->
+<a class="text-secondary font-label-bold text-label-bold hover:bg-white/5 hover:text-secondary scale-95 active:opacity-80 transition-all duration-200 px-4 py-2 rounded-full border border-secondary/30 flex items-center gap-2 hidden md:flex" href="#contatti">
+                Richiedi Consulenza
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-20">
+<!-- 1. Hero Section -->
+<section class="relative min-h-[90vh] flex items-center bg-primary-container hero-bg grid-bg overflow-hidden border-b border-white/5">
+<!-- Subtle Teal Glow -->
+<div class="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-secondary/15 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="max-w-container-max mx-auto px-margin relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-8 flex flex-col gap-stack-md py-stack-lg">
+<div id="hero-badge" class="flex items-center gap-3 mb-4">
+<span class="px-3 py-1 bg-secondary/10 border border-secondary/20 rounded-full text-secondary font-label-bold text-label-bold uppercase tracking-widest flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                            Finanza Alternativa
+                        </span>
+</div>
+<h1 class="font-display-xl text-display-xl text-on-surface leading-tight drop-shadow-lg">
+                        Fai partire la crescita <br class="hidden md:block"/> della tua azienda
+                    </h1>
+<p id="hero-sub" class="font-headline-md text-headline-md text-on-surface-variant max-w-3xl">
+                        Noleggio operativo di beni strumentali per PMI e professionisti. <span class="text-on-surface">Senza intaccare il tuo flusso di cassa.</span>
+</p>
+<div id="hero-cta" class="flex flex-col sm:flex-row gap-4 mt-stack-sm">
+<a class="bg-secondary text-on-secondary font-label-bold text-label-bold px-8 py-4 rounded-md flex items-center justify-center gap-2 hover:bg-secondary-fixed transition-colors shadow-[0_0_40px_rgba(61,191,168,0.15)]" href="#contatti">
+                            Richiedi una consulenza gratuita
+                            <span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</a>
+<a class="bg-transparent border border-secondary text-secondary font-label-bold text-label-bold px-8 py-4 rounded-md flex items-center justify-center gap-2 hover:bg-secondary/5 transition-colors" href="#servizi">
+                            Scopri come funziona
+                        </a>
+</div>
+</div>
+<!-- Abstract Data Visualization / Glassmorphic Element -->
+<div id="hero-card" class="lg:col-span-4 hidden lg:block relative">
+<div class="glass-panel rounded-xl p-6 relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+<div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+<span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider">Flusso di Cassa</span>
+<span class="material-symbols-outlined text-secondary">monitoring</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-end gap-2 h-32">
+<div class="chart-bar w-full bg-surface-container-high rounded-t-sm h-1/4"></div>
+<div class="chart-bar w-full bg-surface-container-high rounded-t-sm h-2/4"></div>
+<div class="chart-bar w-full bg-surface-container-high rounded-t-sm h-1/3"></div>
+<div class="chart-bar w-full bg-secondary rounded-t-sm h-full relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface px-2 py-1 rounded text-label-sm text-secondary opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">+24% Crescita</div>
+</div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant border-t border-white/10 pt-2">
+<span class="">Q1</span><span class="">Q2</span><span class="">Q3</span><span class="text-secondary font-bold">Q4</span>
+</div>
+</div>
+</div>
+<!-- Decorative back plate -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary-container to-surface-container-high rounded-xl transform -rotate-3 scale-105 -z-10 border border-white/5"></div>
+</div>
+</div>
+</section>
+<!-- 2. Chi Siamo -->
+<section class="py-stack-lg bg-surface relative overflow-hidden" id="chi-siamo">
+<div class="max-w-container-max mx-auto px-margin">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md items-center">
+<div class="relative image-col">
+<div class="aspect-square md:aspect-[4/5] rounded-xl overflow-hidden glass-panel relative z-10 p-2">
+<div class="w-full h-full bg-surface-container-high rounded-lg bg-cover bg-center" data-alt="A high-quality professional photograph of a bright, modern corporate boardroom with a minimalist aesthetic, featuring a large glass table and ergonomic seating." style='background-image: url("chi_siamo_boardroom.png");'></div>
+</div>
+<!-- Accent element -->
+<div class="absolute -bottom-8 -right-8 w-48 h-48 bg-secondary/10 backdrop-blur-3xl rounded-full z-0"></div>
+</div>
+<div class="text-col flex flex-col gap-6 pl-0 md:pl-stack-sm">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined">corporate_fare</span>
+<span class="font-label-bold text-label-bold uppercase tracking-wider">Chi Siamo</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">
+                            Approccio consultivo, <br/>
+<span class="text-secondary">soluzioni personalizzate.</span>
+</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Fondata nel 2019 a Roma, in Via Ferdinando Galiani 51, Start è specializzata nel noleggio operativo come alternativa evoluta all'acquisto tradizionale. Ci poniamo all'intersezione tra stabilità istituzionale e l'energia dinamica della finanza alternativa.
+                        </p>
+<div class="feature-cards grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+<div class="feature-card glass-panel p-4 rounded-lg flex items-start gap-3 border-l-2 border-l-secondary">
+<span class="material-symbols-outlined text-secondary mt-1">handshake</span>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-1">Intesa Sanpaolo</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Agenzia Ufficiale Rent for You</p>
+</div>
+</div>
+<div class="feature-card glass-panel p-4 rounded-lg flex items-start gap-3 border-l-2 border-l-surface-container-highest">
+<span class="material-symbols-outlined text-on-surface-variant mt-1">public</span>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-1">Partnership Globali</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Johix &amp; TLR Switzerland (Italia/Spagna)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Banner Cover -->
+<section class="w-full relative border-y border-white/5 overflow-hidden">
+<div class="w-full aspect-[1584/385] bg-cover bg-center" style="background-image: url('start_srls_cover.jpg?v=2');" data-alt="Start Srls Cover Image">
+<div class="absolute inset-0 bg-gradient-to-r from-surface/50 to-transparent"></div>
+</div>
+</section>
+<!-- 3. Servizi (Bento Grid) -->
+<section class="py-stack-lg bg-surface-container-low border-y border-white/5" id="servizi">
+<div class="max-w-container-max mx-auto px-margin">
+<div class="section-header text-center mb-stack-md max-w-2xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Le Nostre Soluzioni</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Strumenti finanziari avanzati per garantire alla tua impresa tecnologia sempre aggiornata e liquidità immediata.
+                    </p>
+</div>
+<div class="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Noleggio Operativo (Spans 2 columns on lg) -->
+<div class="service-card glass-panel rounded-xl p-8 lg:col-span-2 group hover:bg-white/5 transition-colors duration-300 relative overflow-hidden">
+<div class="absolute right-0 top-0 w-64 h-64 bg-secondary/5 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/4 group-hover:bg-secondary/10 transition-colors duration-500"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div class="mb-6">
+<div class="w-12 h-12 rounded-lg bg-primary-container border border-secondary/30 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary text-3xl">autorenew</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Noleggio Operativo</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg">
+                                    Soluzioni flessibili per PMI e professionisti. Nessun investimento iniziale, un canone unico prestabilito, e beni strumentali sempre aggiornati per mantenere la massima competitività.
+                                </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-label-bold text-label-bold uppercase">
+                                Scopri di più <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Factoring -->
+<div class="service-card glass-panel rounded-xl p-8 group hover:bg-white/5 transition-colors duration-300">
+<div class="w-12 h-12 rounded-lg bg-primary-container border border-white/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-surface text-3xl">account_balance_wallet</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-3">Factoring &amp; Cessione</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Liquidità immediata sui tuoi crediti commerciali. Ottimizza il circolante senza appesantire le linee di credito bancarie.
+                        </p>
+<div class="mt-auto flex items-center gap-2 text-on-surface-variant font-label-bold text-label-bold group-hover:text-secondary transition-colors">
+                            Dettagli <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</div>
+</div>
+<!-- Card 3: Johix -->
+<div class="service-card glass-panel rounded-xl p-8 group hover:bg-white/5 transition-colors duration-300">
+<div class="w-12 h-12 rounded-lg bg-primary-container border border-white/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-surface text-3xl">bolt</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-3">Agente Johix</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Piattaforma digitale per noleggio operativo istantaneo e gestione abbonamenti. Velocità e automazione al servizio del tuo business.
+                        </p>
+</div>
+<!-- Card 4: TLR Switzerland -->
+<div class="service-card glass-panel rounded-xl p-8 lg:col-span-2 group hover:bg-white/5 transition-colors duration-300 bg-primary-container/30">
+<div class="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between h-full">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface border border-white/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-surface text-3xl">precision_manufacturing</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-3">Agente TLR Switzerland</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+                                    Leasing operativo specializzato su macchinari industriali pesanti. Copertura estesa su tutto il territorio di Italia &amp; Spagna.
+                                </p>
+</div>
+<div class="flex-shrink-0 w-full md:w-auto">
+<div class="h-32 w-full md:w-48 bg-surface-container rounded-lg border border-white/5 flex items-center justify-center bg-cover bg-center" data-alt="Professional photography of advanced industrial robotic components in a high-tech facility, showcasing precision engineering and automation." style='background-image: linear-gradient(to right, rgba(21, 27, 61, 0.8), rgba(21, 27, 61, 0.4)), url("servizi_industrial.png");'>
+<span class="material-symbols-outlined text-white/50 text-4xl">map</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Perché il noleggio operativo? -->
+<section class="py-stack-lg bg-background relative" id="perche-noleggio">
+<div class="max-w-container-max mx-auto px-margin relative z-10">
+<div class="flex flex-col lg:flex-row gap-stack-md">
+<div class="lg:w-1/3">
+<div class="sticky-title sticky top-32">
+<h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight mb-6">
+                                Perché il noleggio <br/>
+<span class="text-secondary border-b-2 border-secondary pb-1">operativo?</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                                L'evoluzione del possesso. Trasforma i costi di capitale (CAPEX) in costi operativi (OPEX) prevedibili, mantenendo agilità e innovazione.
+                            </p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-bold text-label-bold hover:bg-secondary/10 px-4 py-2 rounded-md transition-colors border border-transparent hover:border-secondary/30" href="#contatti">
+                                Calcola il tuo canone <span class="material-symbols-outlined text-[18px]">calculate</span>
+</a>
+</div>
+</div>
+<div class="benefits-grid lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Benefit 1 -->
+<div class="benefit-card glass-panel p-6 rounded-xl border border-white/5 hover:border-secondary/30 transition-colors group">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mb-4 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-[20px]">money_off</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface mb-2">Nessun esborso iniziale</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Preserva la tua liquidità. Nessun maxi-canone o anticipo richiesto per avviare il progetto.</p>
+</div>
+<!-- Benefit 2 -->
+<div class="benefit-card glass-panel p-6 rounded-xl border border-white/5 hover:border-secondary/30 transition-colors group">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mb-4 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-[20px]">receipt_long</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface mb-2">Canoni 100% deducibili</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Massima efficienza fiscale. I canoni sono interamente deducibili ai fini IRES e IRAP.</p>
+</div>
+<!-- Benefit 3 -->
+<div class="benefit-card glass-panel p-6 rounded-xl border border-white/5 hover:border-secondary/30 transition-colors group">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mb-4 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-[20px]">scale</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface mb-2">Bilancio più leggero</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Nessuna segnalazione in Centrale Rischi. Il noleggio non impatta sull'indebitamento aziendale.</p>
+</div>
+<!-- Benefit 4 -->
+<div class="benefit-card glass-panel p-6 rounded-xl border border-white/5 hover:border-secondary/30 transition-colors group">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mb-4 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-[20px]">update</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface mb-2">Tecnologia sempre aggiornata</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Evita l'obsolescenza programmata. Sostituisci o aggiorna i beni al termine o durante il contratto.</p>
+</div>
+<!-- Benefit 5 -->
+<div class="benefit-card glass-panel p-6 rounded-xl border border-white/5 hover:border-secondary/30 transition-colors group sm:col-span-2">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-[20px]">recycling</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-2">Economia Circolare</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Contribuisce attivamente a un modello sostenibile, gestendo responsabilmente il fine vita delle apparecchiature (Refurbished/Second Life).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section class="py-stack-lg bg-surface relative" id="team">
+<div class="max-w-container-max mx-auto px-margin relative z-10">
+<div class="team-header text-center mb-stack-md max-w-2xl mx-auto">
+<div class="flex items-center justify-center gap-2 text-secondary mb-4">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-bold text-label-bold uppercase tracking-wider">Le Persone Dietro Start</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Il Nostro Team</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Un team di esperti dedicati a supportare la crescita della tua azienda attraverso soluzioni finanziarie innovative.
+            </p>
+</div>
+<div class="team-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Member 1 -->
+<div class="team-card glass-panel bg-surface-container-low rounded-xl p-6 flex flex-col items-center text-center group hover:border-secondary/30 transition-all">
+<div class="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-secondary/20 group-hover:border-secondary/50 transition-colors">
+<img alt="Member 1" class="w-full h-full object-cover" src="team_1.png"/>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Membro di Link...</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-6 min-h-[40px]">Co-Founder &amp; CTO presso AICODIFY</p>
+<button class="mt-auto w-full border border-secondary text-secondary hover:bg-secondary hover:text-on-secondary py-2 px-4 rounded-full font-label-bold text-label-bold transition-all flex items-center justify-center gap-2">
+                    Messaggio
+                </button>
+</div>
+<!-- Member 2 -->
+<div class="team-card glass-panel bg-surface-container-low rounded-xl p-6 flex flex-col items-center text-center group hover:border-secondary/30 transition-all">
+<div class="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-secondary/20 group-hover:border-secondary/50 transition-colors">
+<img alt="Member 2" class="w-full h-full object-cover" src="team_2.png"/>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Membro di Link...</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-6 min-h-[40px]">Back office &amp; Amministrazione</p>
+<button class="mt-auto w-full border border-secondary text-secondary hover:bg-secondary hover:text-on-secondary py-2 px-4 rounded-full font-label-bold text-label-bold transition-all flex items-center justify-center gap-2">
+                    Messaggio
+                </button>
+</div>
+<!-- Member 3 -->
+<div class="team-card glass-panel bg-surface-container-low rounded-xl p-6 flex flex-col items-center text-center group hover:border-secondary/30 transition-all">
+<div class="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-secondary/20 group-hover:border-secondary/50 transition-colors">
+<img alt="Marco Selmi" class="w-full h-full object-cover" src="team_3.png"/>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Marco Selmi</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-6 min-h-[40px]">Esperto noleggio operativo</p>
+<button class="mt-auto w-full border border-secondary text-secondary hover:bg-secondary hover:text-on-secondary py-2 px-4 rounded-full font-label-bold text-label-bold transition-all flex items-center justify-center gap-2">
+                    Messaggio
+                </button>
+</div>
+<!-- Member 4 -->
+<div class="team-card glass-panel bg-surface-container-low rounded-xl p-6 flex flex-col items-center text-center group hover:border-secondary/30 transition-all">
+<div class="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-secondary/20 group-hover:border-secondary/50 transition-colors">
+<img alt="Member 4" class="w-full h-full object-cover" src="team_4.png"/>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Membro di Link...</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-6 min-h-[40px]">Sales account manager presso Start.eu | Soluzioni per il...</p>
+<button class="mt-auto w-full border border-secondary text-secondary hover:bg-secondary hover:text-on-secondary py-2 px-4 rounded-full font-label-bold text-label-bold transition-all flex items-center justify-center gap-2">
+                    Messaggio
+                </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Contatti -->
+<section class="py-stack-lg bg-primary-container border-t border-white/5 relative overflow-hidden" id="contatti">
+<!-- Decorative Wireframe -->
+<div class="absolute right-0 bottom-0 opacity-10 pointer-events-none w-1/2 h-full" style="background-image: repeating-linear-gradient(45deg, #5edac2 0, #5edac2 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
+<div class="max-w-container-max mx-auto px-margin relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg">
+<!-- Info -->
+<div class="contact-info">
+<h2 class="font-display-xl text-display-xl text-on-surface mb-6">Pronto a partire? <span class="text-secondary inline-block transform translate-y-2">▶</span></h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-md">
+                            Richiedi un'analisi gratuita della tua struttura costi. I nostri advisor sono a disposizione per definire il piano di noleggio ideale.
+                        </p>
+<div class="space-y-6">
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 rounded-full bg-surface-container border border-white/10 flex items-center justify-center group-hover:border-secondary/50 transition-colors">
+<span class="material-symbols-outlined text-secondary">mail</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Email Diretta</p>
+<a class="font-title-md text-title-md text-on-surface hover:text-secondary transition-colors" href="mailto:mselmi@startsrls.com">mselmi@startsrls.com</a>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 rounded-full bg-surface-container border border-white/10 flex items-center justify-center group-hover:border-secondary/50 transition-colors">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Headquarters</p>
+<p class="font-title-md text-title-md text-on-surface">Via Ferdinando Galiani 51, <br/> 00191 Roma</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Form -->
+<div class="contact-form glass-panel p-8 rounded-2xl border border-white/10 relative">
+<div class="absolute inset-0 bg-surface-container-high/50 rounded-2xl -z-10"></div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Nome Completo</label>
+<input class="w-full bg-background border-b border-surface-container-highest text-on-surface px-4 py-3 focus:outline-none focus:border-secondary transition-colors rounded-t-sm" placeholder="Mario Rossi" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Azienda / P.IVA</label>
+<input class="w-full bg-background border-b border-surface-container-highest text-on-surface px-4 py-3 focus:outline-none focus:border-secondary transition-colors rounded-t-sm" placeholder="Ragione Sociale" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Tipo di Richiesta</label>
+<select class="w-full bg-background border-b border-surface-container-highest text-on-surface px-4 py-3 focus:outline-none focus:border-secondary transition-colors rounded-t-sm appearance-none">
+<option disabled="" selected="" value="">Seleziona un'area di interesse</option>
+<option value="noleggio">Noleggio Operativo Standard</option>
+<option value="factoring">Factoring &amp; Cessione</option>
+<option value="macchinari">Leasing Macchinari (TLR)</option>
+<option value="altro">Altro</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Messaggio (Opzionale)</label>
+<textarea class="w-full bg-background border-b border-surface-container-highest text-on-surface px-4 py-3 focus:outline-none focus:border-secondary transition-colors rounded-t-sm resize-none" placeholder="Descrivi brevemente le tue esigenze..." rows="3"></textarea>
+</div>
+<button class="w-full bg-secondary text-on-secondary font-label-bold text-label-bold px-8 py-4 rounded-md flex items-center justify-center gap-2 hover:bg-secondary-fixed transition-colors mt-4" type="button">
+                                Invia Richiesta
+                                <span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>send</span>
+</button>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant opacity-70 mt-4">I tuoi dati sono trattati in conformità alla nostra Privacy Policy.</p>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Shared Component: Footer -->
+<footer class="bg-surface-container-lowest w-full py-stack-lg border-t border-white/5 flat no shadows">
+<div class="max-w-container-max mx-auto px-margin grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Brand & Copyright -->
+<div class="flex flex-col gap-4">
+<span class="font-title-md text-title-md font-bold text-on-surface flex items-center gap-2">
+<img alt="Start Logo Minimal" class="h-6 w-auto grayscale opacity-80" data-alt="A highly detailed, minimalistic monochrome rendering of the 'Start' financial corporate logo. The sharp geometric structures are stripped of color, presented in pristine white and greys against a completely dark background, emphasizing form, precision, and institutional weight. The 'play' triangle motif is subtle but distinct." src="logo.png"/></span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">
+                    © 2024 Start S.r.l. - Agenzia Intesa Sanpaolo Rent for You. P.IVA 0123456789
+                </p>
+</div>
+<!-- Links -->
+<div class="flex flex-wrap md:justify-end gap-6 items-center">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary hover:underline decoration-secondary underline-offset-4 transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary hover:underline decoration-secondary underline-offset-4 transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Cookie Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary hover:underline decoration-secondary underline-offset-4 transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Termini e Condizioni</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary hover:underline decoration-secondary underline-offset-4 transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Lavora con noi</a>
+</div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+<script>
+  const { animate, inView, stagger } = Motion;
+
+  // Imposta opacità 0 sugli elementi che animeranno
+  const initSelectors = [
+    '#hero-badge', 'h1', '#hero-sub', '#hero-cta', '#hero-card',
+    '.image-col', '.text-col', '.feature-card',
+    '.section-header', '.service-card',
+    '.sticky-title', '.benefit-card',
+    '.team-header', '.team-card',
+    '.contact-info', '.contact-form'
+  ];
+  initSelectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => { el.style.opacity = '0'; });
+  });
+  document.querySelectorAll('.chart-bar').forEach(el => {
+    el.style.transform = 'scaleY(0)';
+  });
+
+  // ===== HERO (caricamento pagina) =====
+  animate('nav', { opacity: [0, 1], y: [-24, 0] }, { duration: 0.5, easing: [0.25, 0.1, 0.25, 1] });
+  animate('#hero-badge', { opacity: [0, 1], scale: [0.85, 1] }, { duration: 0.5, delay: 0.25 });
+  animate('h1', { opacity: [0, 1], y: [50, 0] }, { duration: 0.8, delay: 0.4, easing: [0.16, 1, 0.3, 1] });
+  animate('#hero-sub', { opacity: [0, 1], y: [30, 0] }, { duration: 0.7, delay: 0.55, easing: [0.16, 1, 0.3, 1] });
+  animate('#hero-cta', { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, delay: 0.7 });
+
+  // Hero card: entrata poi galleggiamento
+  const heroCardAnim = animate('#hero-card', { opacity: [0, 1], x: [60, 0] }, {
+    duration: 0.9, delay: 0.55, easing: [0.16, 1, 0.3, 1]
+  });
+  heroCardAnim.then(() => {
+    animate('#hero-card', { y: [0, -14, 0] }, { duration: 7, repeat: Infinity, easing: 'ease-in-out' });
+  });
+
+  // Barre del grafico
+  animate('.chart-bar', { scaleY: [0, 1] }, {
+    duration: 0.7,
+    delay: stagger(0.12, { start: 1.1 }),
+    easing: [0.34, 1.56, 0.64, 1]
+  });
+
+  // ===== ANIMAZIONI ALLO SCROLL =====
+  function onceInView(selector, keyframes, opts = {}) {
+    inView(selector, (entry) => {
+      const el = entry.target || entry;
+      if (el.dataset.anim) return;
+      el.dataset.anim = '1';
+      animate(el, keyframes, { duration: 0.7, easing: [0.16, 1, 0.3, 1], ...opts });
+    }, { amount: 0.2 });
+  }
+
+  function onceGroupInView(parentSel, childSel, keyframes, opts = {}) {
+    inView(parentSel, (entry) => {
+      const parent = entry.target || entry;
+      if (parent.dataset.anim) return;
+      parent.dataset.anim = '1';
+      animate(parent.querySelectorAll(childSel), keyframes,
+        { duration: 0.6, easing: [0.16, 1, 0.3, 1], ...opts });
+    }, { amount: 0.05 });
+  }
+
+  // Chi Siamo
+  onceInView('.image-col', { opacity: [0, 1], x: [-60, 0] });
+  onceInView('.text-col', { opacity: [0, 1], x: [50, 0] }, { delay: 0.1 });
+  onceGroupInView('.feature-cards', '.feature-card',
+    { opacity: [0, 1], y: [25, 0] }, { delay: stagger(0.15) });
+
+  // Servizi
+  onceInView('.section-header', { opacity: [0, 1], y: [30, 0] });
+  onceGroupInView('.services-grid', '.service-card',
+    { opacity: [0, 1], y: [40, 0] }, { delay: stagger(0.1) });
+
+  // Perché il noleggio
+  onceInView('.sticky-title', { opacity: [0, 1], x: [-40, 0] });
+  onceGroupInView('.benefits-grid', '.benefit-card',
+    { opacity: [0, 1], y: [30, 0] }, { delay: stagger(0.1) });
+
+  // Team
+  onceInView('.team-header', { opacity: [0, 1], y: [25, 0] });
+  onceGroupInView('.team-grid', '.team-card',
+    { opacity: [0, 1], y: [40, 0], scale: [0.95, 1] },
+    { delay: stagger(0.12), easing: [0.34, 1.56, 0.64, 1] });
+
+  // Contatti
+  onceInView('.contact-info', { opacity: [0, 1], x: [-40, 0] });
+  onceInView('.contact-form', { opacity: [0, 1], x: [40, 0] }, { delay: 0.1 });
+</script>
+</body></html>
